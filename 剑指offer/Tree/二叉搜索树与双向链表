@@ -1,0 +1,35 @@
+/*
+struct TreeNode {
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+    TreeNode(int x) :
+            val(x), left(NULL), right(NULL) {
+    }
+};*/
+class Solution {
+public:
+    TreeNode* Convert(TreeNode* pRootOfTree)
+    {
+        if(!pRootOfTree)
+            return nullptr;
+        TreeNode* pre = nullptr; 
+        CoverNode(pRootOfTree,pre);
+        TreeNode* res = pRootOfTree;
+        while(res->left)
+        {
+            res = res->left;
+        }
+        return res;
+    }
+     
+    void CoverNode(TreeNode* cur,TreeNode*& pre)
+    {
+        if(!cur)return;
+        CoverNode(cur->left,pre);
+        cur->left = pre;
+        if(pre)pre->right = cur;
+        pre = cur;
+        CoverNode(cur->right,pre);
+    }
+};

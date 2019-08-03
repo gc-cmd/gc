@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool IsBalanced_Solution(TreeNode* pRoot) {
+         int dps = 0;
+        return IsBlanced(pRoot,dps);
+    }
+    bool IsBlanced(TreeNode*pRoot,int& dps)
+    {
+        if(!pRoot)
+            return true;
+        int left = 0;
+        int right = 0;
+        if(IsBlanced(pRoot->left,left) && IsBlanced(pRoot->right,right))
+           {
+               int dif = left-right;
+                if(dif > 1 || dif < -1)
+                {
+                    return false;
+                }
+            dps = (left > right ? left : right) + 1;
+            return true;
+           }
+       return false;
+    }
+ 
+};

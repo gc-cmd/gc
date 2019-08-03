@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<string>vec;
+    vector<string> Permutation(string str) {
+        prem(str,0);
+        sort(vec.begin(),vec.end());
+        return vec;
+    }
+    void prem(string str,int k)
+    {
+        if(k == str.size()-1)
+            vec.push_back(str);
+        for(int i = k; i < str.size();++i)
+        {
+            if(i != k && str[i] == str[k])
+            {
+                continue;
+            }
+            swap(str[i],str[k]);
+            prem(str,k+1);
+            swap(str[i],str[k]);
+        }
+    }
+};

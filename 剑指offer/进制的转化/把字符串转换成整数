@@ -1,0 +1,60 @@
+class Solution {
+public:
+    int StrToInt(string str) {
+        long long num = 0;
+        int flag = 0;
+        auto it = str.begin();
+        if(!str.empty() && *it != '\0')
+        {
+            bool minus = true;
+            if(*it == '+')
+            {
+                flag = 1;
+            }
+            if(*it == '-')
+            {
+                minus = false;
+                flag = 1;
+            }
+            if(*it != '\0')
+            {
+                num = strtointcore(str,minus,flag);
+            }
+        }
+        return (int)num;
+    }
+    long long strtointcore(string str,bool minus ,int a)
+    {
+        long long num = 0;
+        auto it = str.begin();
+        if(a == 1)
+        {
+            it = ++it;
+        }
+ 
+            while(*it != '\0')
+            {
+                if(*it <= '9' && *it >= '0')
+                {
+                    int flag = (minus ? 1 : -1);
+                    num = num*10 + flag * (*it - '0');
+                    if((minus && num > 0x7fffffff )||(!minus && num < (signed int)0x80000000))
+                    {
+                        num = 0;
+                        break;
+                    }
+                    it++;
+                    if(it == str.end())
+                    {
+                        break;
+                    }
+                 }
+                else
+                {
+                    num = 0;
+                    break;
+                }
+            }
+            return num;
+    }
+};

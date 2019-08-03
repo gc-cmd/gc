@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int jumpFloor(int number) {
+        int data[40];
+        data[0] = 0;
+        data[1] = 1;
+        data[2] = 2;
+            for(int i = 3; i <= number;++i)
+            {
+                data[i] = data[i-1]+data[i-2];
+            }
+        return data[number];
+    }
+};

@@ -1,0 +1,41 @@
+class Solution {
+public:
+    vector<vector<int> > FindContinuousSequence(int sum) {
+        vector<vector<int> >vec;
+        if(sum < 3)
+        {
+            return vec;
+        }
+        int low = 1;
+        int high = 2;
+         
+        while( high > low && high <= (sum+1)/2)
+        {
+            int num = 0;
+            for(int i = low ; i <= high;++i)
+            {
+                num += i;
+            }
+            if(num == sum)
+            {
+                vector<int>tmp;
+                for(int i = low ; i <= high;++i)
+                {
+                    tmp.push_back(i);
+                }
+                vec.push_back(tmp);
+                num = 0;
+                low++;
+            }
+            else if(num > sum)
+            {
+                low++;
+            }
+            else
+            {
+                high++;
+            }
+        }
+        return vec;
+    }
+};

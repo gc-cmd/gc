@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool VerifySquenceOfBST(vector<int> sequence) 
+    {
+        if(sequence.size() == 0)
+        {
+            return false;
+        }
+        vector<int>vecleft;
+        int len = sequence.size();
+        int root = sequence[len-1];
+        int i = 0,j = 0;
+        for(; i < len-1; ++i)
+        {
+            if(sequence[i] > root)
+                break;
+            vecleft.push_back(sequence[i]);
+        }
+        vector<int>vecright;
+        for(j = i;j < len-1;++j)
+        {
+            if(sequence[j] < root)
+                return false;
+            vecright.push_back(sequence[j]);
+        }
+        bool left = true;
+        if(i > 0)
+        {
+            left = VerifySquenceOfBST(vecleft);
+        }
+        bool right = true;
+        if(j < len-1)
+        {
+            right = VerifySquenceOfBST(vecright);
+        }
+        return left && right;
+    }
+};

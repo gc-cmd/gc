@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool Find(int target, vector<vector<int> > array) 
+    {
+        int row = array.size();
+        int col = array[0].size();
+        int a = 0;
+        int b = col-1;
+        while(a < row && b >= 0)
+        {
+            if(array[a][b] > target)
+            {
+                b--;
+            }
+            else if(array[a][b] == target)
+            {
+                return true;
+            }
+            else
+            {
+                a++;
+            }
+        }
+        return false;
+    }
+};

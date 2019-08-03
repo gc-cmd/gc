@@ -1,0 +1,48 @@
+/*
+struct RandomListNode {
+    int label;
+    struct RandomListNode *next, *random;
+    RandomListNode(int x) :
+            label(x), next(NULL), random(NULL) {
+    }
+};
+*/
+class Solution {
+public:
+    RandomListNode* Clone(RandomListNode* pHead)
+    {
+        if(!pHead)
+        {
+            return NULL;
+        }
+        RandomListNode* cur = pHead;
+        while(cur)
+        {
+            RandomListNode* pNode = new RandomListNode(cur->label);
+            pNode->next = cur->next;
+            cur->next = pNode;
+            cur = pNode->next;
+        }
+        cur = pHead;
+        RandomListNode* p;
+        while(cur != NULL)
+        {
+            p = cur->next;
+            if(cur->random)
+            {
+                p->random = cur->random->next;
+            }
+            cur = p->next;
+        }
+        RandomListNode* CloneNode = pHead->next;
+        RandomListNode* tmp;
+        cur = pHead;
+        while(cur->next != NULL)
+        {
+            tmp = cur->next;
+            cur->next = tmp->next;
+            cur = tmp;
+        }
+        return CloneNode;
+    }
+};

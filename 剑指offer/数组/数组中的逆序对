@@ -1,0 +1,52 @@
+class Solution {
+public:
+    int InversePairs(vector<int> data) {
+        if(data.size() == 0)
+        {
+            return 0;
+        }
+        vector<int>copy;
+        for(int i = 0; i < data.size(); ++i)
+        {
+            copy.push_back(data[i]);
+        }
+       long long res = InversePairscopy(data,copy,0,data.size()-1);
+        return res%1000000007;
+    }
+    long long InversePairscopy(vector<int>& data,vector<int>& copy,int str,int end)
+    {
+        if(str == end)
+        {
+          copy[str] = data[str];
+            return 0;
+        }
+        int length = (end-str)/2;
+        long long left = InversePairscopy(copy,data,str,str+length);
+        long long right = InversePairscopy(copy,data,str+length+1,end);
+        int i = str+length;
+        int j = end;
+        int index = end;
+        long long count = 0;
+        while(i >= str && j >= str+length + 1)
+        {
+            if(data[i] > data[j])
+            {
+                copy[index--] = data[i--];
+                count = count+j-(str+length+1)+1;
+            }
+            else
+            {
+                copy[index--] = data[j--];
+            }
+        }
+        for(;i >= str;i--)
+        {
+            copy[index--] = data[i];
+        }
+        for(; j>= str+length+1;j--)
+        {
+            copy[index--] = data[j];
+        }
+        return left + right + count;
+    }
+};

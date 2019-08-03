@@ -1,0 +1,42 @@
+class Solution {
+public:
+    vector<int> FindNumbersWithSum(vector<int> array,int sum) {
+        vector<int> vec;
+        if(array.size() == 0)
+        {
+            return vec;
+        }
+        int low = 0;
+        int m  = 0;
+        int high = array.size()-1;
+        while(low < high)
+        {
+            if(array[low]+ array[high] > sum)
+            {
+                high--;
+            }
+            else if(array[low]+ array[high] < sum)
+            {
+                low++;
+            }
+            else
+            {
+                if(vec.empty()|| m > array[low]*array[high])
+                {
+                    if(!vec.empty())
+                    {
+                        vec.clear();
+                    }
+                    vec.push_back(array[low]);
+                    vec.push_back(array[high]);
+                    m = array[low] * array[high];
+                }
+                else
+                {
+                    low++;
+                }
+            }
+        }
+        return vec;
+    }
+};

@@ -1,0 +1,40 @@
+/*
+struct TreeNode {
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+    TreeNode(int x) :
+            val(x), left(NULL), right(NULL) {
+    }
+};
+*/
+class Solution {
+public:
+    bool isSymmetrical(TreeNode* pRoot)
+    {
+        if(pRoot == NULL)
+        {
+            return true;
+        }
+        return Isseam(pRoot->left,pRoot->right);
+    }
+    bool Isseam(TreeNode* r1,TreeNode* r2)
+    {
+        if(r1 == NULL && r2 == NULL)
+        {
+            return true;
+        }
+        else if(r1 == NULL || r2 == NULL)
+        {
+            return false;
+        }
+        else
+        {
+            if(r1->val == r2->val)
+            {
+                return Isseam(r1->left,r2->right) && Isseam(r1->right,r2->left);
+            }
+            return false;
+        }
+    }
+};
